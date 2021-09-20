@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Lavender Flowers',
     image: '/images/lavender2.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Dandelion Flowers',
     image: '/images/dandelion.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Sage',
     image: '/images/sage2.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '4',
     name: 'Nettle Leaf',
     image: '/images/nettle.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Elder Flower',
     image: '/images/elderFlower2.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Black Elderberry',
     image: '/images/blackElderberry.jpg',
     description:
