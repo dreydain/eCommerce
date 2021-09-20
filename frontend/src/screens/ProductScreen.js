@@ -6,7 +6,8 @@ import axios from 'axios'
 
 const ProductScreen = ({match}) => {
     const [product, setProduct] = useState({})
-
+    
+    //Using a function to make axios request but not using .then and .catch syntax
     useEffect(() => {
         const fetchProduct = async () => {
             const {data} = await axios.get(`/api/products/${match.params.id}`)
@@ -15,7 +16,7 @@ const ProductScreen = ({match}) => {
         }
 
         fetchProduct()
-    }, [])
+    }, [match])
 
     return (
         <>

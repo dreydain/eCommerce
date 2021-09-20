@@ -6,6 +6,7 @@ import {Row, Col} from 'react-bootstrap'
 const HomeScreen = () => {
     const [products, setProducts] = useState([])
 
+    //Using a function to make axios request but not using .then and .catch syntax
     useEffect(() => {
         const fetchProducts = async () => {
             const {data} = await axios.get('/api/products')
