@@ -30,6 +30,8 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
+//this function will run on pre save to a user being created. It will encrypt and hash the password.
+//It will also check to see if the password was modified/updated, if not then it wont run this function.
 userSchema.pre('save', async function(next) {
     if(!this.isModified('password')) {
         next()
