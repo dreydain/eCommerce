@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {LinkContainer} from 'react-router-bootstrap'
-import {listUsers, userLogin} from '../actions/userActions'
+import {listUsers, userLogin, deleteUser} from '../actions/userActions'
 
 const UserListScreen = ({history}) => {
     const dispatch = useDispatch()
@@ -15,6 +15,9 @@ const UserListScreen = ({history}) => {
     const userLogin = useSelector((state) => state.userLogin)
     const {userInfo} = userLogin
 
+    const userDelete = useSelector((state) => state.userDelete)
+    const {success: successDelete} = userDelete
+
 
     useEffect(() => {
             if(userInfo && userInfo.isAdmin) {
@@ -23,10 +26,14 @@ const UserListScreen = ({history}) => {
                 history.push('/login')
             }
         
-    }, [dispatch, history])
+    }, [dispatch, history, successDelete, userInfo])
 
+    //May need to remove or change the if statement. Clicking cancel still deletes user
     const deleteHandler = (id) => {
-        console.log(id)
+        dispatch(deleteUser(id))
+        if(window.confirm('Are you sure?')) {
+            dispatch(deleteUser(id)) 
+        }
     }
 
     return (
@@ -51,7 +58,7 @@ const UserListScreen = ({history}) => {
                             <tr key={user._id}>
                                 <td>{user._id}</td>
                                 <td>{user.name}</td>
-                                <td><a href={`mailto:${user.email}`}>{user._id}</a></td>
+                                <td><a href={`mailto:${user.email}`}>{user.email}</a></td>
                                 <td>{user.isAdmin
                                         ? <i className='fas fa-check' style={{color: 'green'}}></i>
                                         : <i className='fas fa-times' style={{color: 'red'}}></i>
