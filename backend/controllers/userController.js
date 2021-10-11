@@ -154,8 +154,7 @@ const updateUser = asyncHandler(async (req, res) => {
     if(user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
-        // user.isAdmin = req.body.isAdmin
-        //said isAdmin was required when trying to update in postman.
+        user.isAdmin = req.body.isAdmin
 
         const updatedUser = await user.save()
 
