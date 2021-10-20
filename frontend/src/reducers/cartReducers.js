@@ -45,6 +45,9 @@ export const cartReducer = (state = {cartItems: [], shippingAddress: {} }, actio
                 paymentMethod: action.payload
             }
 
+            case CART_RESET_ITEMS:
+                return {}
+
             default:
                 return state
 
