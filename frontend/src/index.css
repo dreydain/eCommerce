@@ -54,6 +54,16 @@ h3 {
     margin: 0 auto;
 }
 
+.search-box {
+    display: flex;
+    flex-direction: row;
+    margin-left: 50%;
+}
+
+.search-box button {
+    margin-left: 5px;
+}
+
 /* @media (max-width: 900px) {
     .carousel-caption h2 {
         font-size: 2.5vw;

@@ -5,6 +5,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
 import {createOrder} from '../actions/orderActions'
+import {ORDER_CREATE_RESET} from '../constants/orderConstants'
+import {USER_DETAILS_RESET} from '../constants/userConstants'
 
 const PlaceOrderScreen = ({history}) => {
     const dispatch = useDispatch()
@@ -13,6 +15,13 @@ const PlaceOrderScreen = ({history}) => {
     // Calculate Prices
     const addDecimals = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2)
+    }
+
+    if(!cart.ShippingAddress.address) {
+        history.push('shipping')
+
+    } else if (!cart.pamentMethod) {
+        history.push('/payment')
     }
 
     cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
@@ -37,7 +46,10 @@ const PlaceOrderScreen = ({history}) => {
     useEffect(() => {
         if(success) {
             history.push(`/order/${order._id}`)
+            dispatch({type: USER_DETAILS_RESET})
+            dispatch({type: ORDER_CREATE_RESET})
         }
+        
         //eslint-disable-next-line
     }, [history, success])
 
@@ -149,7 +161,8 @@ const PlaceOrderScreen = ({history}) => {
                                     type='button' 
                                     className='btn-block' 
                                     disabled={cart.cartItems === 0}
-                                    onClick={placeOrderHandler}>
+                                    onClick={placeOrderHandler}
+                                    >
                                         Place Order
                                     </Button>
                             </ListGroup.Item>
