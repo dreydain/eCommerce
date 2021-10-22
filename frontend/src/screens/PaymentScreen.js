@@ -6,7 +6,7 @@ import {savePaymentMethod} from '../actions/cartActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 
 const PaymentScreen = ({history}) => {
-    const cart = useSelector(state => state.cart)
+    const cart = useSelector((state) => state.cart)
     const {shippingAddress} = cart
 
     if(!shippingAddress.address) {

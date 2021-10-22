@@ -71,7 +71,6 @@ const OrderScreen = ({match, history}) => {
 
     const deliverHandler = () => {
         dispatch(deliverOrder(order))
-        console.log(order.isDelivered)
     }
 
     const successPaymentHandler = (paymentResult) => {

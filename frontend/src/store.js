@@ -53,8 +53,6 @@ const reducer = combineReducers({
     orderList: orderListReducer,
     orderDeliver: orderDeliverReducer,
     productTopRated: productTopRatedReducer
-    
-    
 })
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')

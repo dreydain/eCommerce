@@ -12,16 +12,16 @@ const PlaceOrderScreen = ({history}) => {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cart)
 
+    if(!cart.shippingAddress.address) {
+        history.push('/shipping')
+
+    } else if (!cart.paymentMethod) {
+        history.push('/payment')
+    }
+
     // Calculate Prices
     const addDecimals = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2)
-    }
-
-    if(!cart.ShippingAddress.address) {
-        history.push('shipping')
-
-    } else if (!cart.pamentMethod) {
-        history.push('/payment')
     }
 
     cart.itemsPrice = addDecimals(cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
