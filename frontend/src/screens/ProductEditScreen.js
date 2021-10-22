@@ -174,7 +174,7 @@ const ProductEditScreen = ({match, history}) => {
                                 onChange={(e) => setDescription(e.target.value)}
                             ></Form.Control>
                         </Form.Group>
-                        <Button type='submit' variant='primary'>
+                        <Button type='submit' variant='primary' className='my-3'>
                             Update
                         </Button>
                     </Form>
