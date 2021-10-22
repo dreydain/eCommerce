@@ -3,23 +3,29 @@ import {
     ORDER_CREATE_REQUEST,
     ORDER_CREATE_SUCCESS,
     ORDER_CREATE_FAIL,
+
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
     ORDER_DETAILS_FAIL,
+
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
+
     ORDER_LIST_MY_SUCCESS,
     ORDER_LIST_MY_FAIL,
     ORDER_LIST_MY_REQUEST,
+
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
     ORDER_LIST_FAIL,
+
     ORDER_DELIVER_REQUEST,
     ORDER_DELIVER_SUCCESS,
     ORDER_DELIVER_FAIL,
-    ORDER_DELIVER_RESET,
 } from '../constants/orderConstants'
+import {logout} from './userActions'
+import {CART_RESET} from '../constants/cartConstants'
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -42,16 +48,25 @@ export const createOrder = (order) => async (dispatch, getState) => {
             type: ORDER_CREATE_SUCCESS,
             payload: data,
         })
+        dispatch({
+            type: CART_RESET,
+            payload: data,
+        })
+
+        localStorage.removeItem('cartItems')
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_CREATE_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
 
@@ -77,14 +92,17 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
         })
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_DETAILS_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
 
@@ -111,14 +129,17 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
         })
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_PAY_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
 
@@ -144,14 +165,17 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
         })
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_DELIVER_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
 
@@ -177,14 +201,17 @@ export const listMyOrders = () => async (dispatch, getState) => {
         })
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_LIST_MY_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
 
@@ -210,13 +237,16 @@ export const listOrders = () => async (dispatch, getState) => {
         })
 
     } catch (error) {
+        const message =
+            error.response && error.response.data.message
+                ? error.response.data.message
+                : error.message
+        if (message === 'Not authorized, token failed') {
+            dispatch(logout())
+        }
         dispatch({
             type: ORDER_LIST_FAIL,
-            payload: 
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
+            payload: message,
         })
-        
     }
 }
