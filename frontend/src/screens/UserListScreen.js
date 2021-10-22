@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import {LinkContainer} from 'react-router-bootstrap'
-import {listUsers, userLogin, deleteUser} from '../actions/userActions'
+import {listUsers, deleteUser} from '../actions/userActions'
 
 const UserListScreen = ({history}) => {
     const dispatch = useDispatch()
